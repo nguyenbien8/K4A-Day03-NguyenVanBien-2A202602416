@@ -46,7 +46,7 @@ Dưới đây là đoạn trace tiêu biểu của `TC04`, được sinh ra từ
         ]
       }
     },
-    "latency_ms": 1364.52
+    "latency_ms": 1585.76
   },
   {
     "step": 2,
@@ -66,7 +66,7 @@ Dưới đây là đoạn trace tiêu biểu của `TC04`, được sinh ra từ
       "specialty": "Da liễu",
       "datetime": "14:00 21/09/2026"
     },
-    "latency_ms": 1972.69
+    "latency_ms": 1411.06
   },
   {
     "step": 3,

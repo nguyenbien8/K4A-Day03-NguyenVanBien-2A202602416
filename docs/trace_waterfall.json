@@ -4,13 +4,14 @@
     "query": "Xin chào, bạn có thể giới thiệu các dịch vụ khám bệnh tại Vinmec không?",
     "action_type": "FINAL_ANSWER",
     "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
-    "output": "Chào bạn! Hệ thống Y tế Vinmec cung cấp các dịch vụ khám chữa bệnh chất lượng cao theo tiêu chuẩn quốc tế với nhiều chuyên khoa đa dạng, bao gồm:\n\n1. **Khám Tổng quát & Sức khỏe định kỳ:** Các gói khám sức khỏe tổng quát cá nhân hóa, khám doanh nghiệp và tầm soát ung thư sớm.\n2. **Chuyên khoa Mũi nhọn:**\n   - **Tim mạch:** Khám, chẩn đoán và điều trị các bệnh lý tim mạch bằng công nghệ tiên tiến (Can thiệp mạch vành, phẫu thuật tim mạch,...).\n   - **Ung bướu:** Tầm soát, hóa trị, xạ trị và chăm sóc giảm nhẹ.\n   - **Sản Phụ khoa:** Khám thai, dịch vụ thai sản trọn gói, điều trị vô sinh hiếm muộn và các bệnh lý phụ khoa.\n   - **Nhi khoa:** Khám và điều trị toàn diện cho trẻ em với không gian thân thiện.\n   - **Cơ xương khớp & Y học thể thao:** Điều trị các chấn thương thể thao, thay khớp, thoái hóa khớp.\n3. **Các chuyên khoa khác:** Thần kinh, Tiêu hóa, Mắt, Tai Mũi Họng, Răng Hàm Mặt, Da liễu, Y học cổ truyền,...\n4. **Dịch vụ cận lâm sàng:** Hệ thống chẩn đoán hình ảnh (MRI, CT Scan hiện đại) và xét nghiệm đạt chuẩn quốc tế.\n\nNếu bạn cần tra cứu thông tin bác sĩ, chuyên khoa cụ thể hoặc muốn đặt lịch khám, hãy cho tôi biết nhé!",
-    "latency_ms": 3517.09
+    "output": "Chào bạn, Hệ thống Y tế Vinmec cung cấp các dịch vụ y tế toàn diện và chất lượng cao theo tiêu chuẩn quốc tế, bao gồm:\n\n1. **Khám và điều trị đa khoa:** Từ các chuyên khoa phổ biến như Nội tổng quát, Nhi khoa, Phụ sản, Tai - Mũi - Họng, Răng - Hàm - Mặt cho đến các chuyên khoa sâu như Tim mạch, Thần kinh, Ung bướu, Chấn thương chỉnh hình,...\n2. **Khám sức khỏe tổng quát & Tầm soát ung thư:** Các gói khám sức khỏe định kỳ cá nhân hóa và các chương trình tầm soát sớm ung thư, bệnh lý tim mạch, tiểu đường,... bằng công nghệ hiện đại.\n3. **Dịch vụ Cận lâm sàng & Chẩn đoán hình ảnh:** Hệ thống xét nghiệm tự động, siêu âm, chụp X-quang, MRI, CT Scan,... cho kết quả nhanh chóng và chính xác.\n4. **Y học cổ truyền & Phục hồi chức năng:** Kết hợp y học hiện đại và cổ truyền cùng các bài tập vật lý trị liệu chuyên sâu.\n5. **Dịch vụ Thai sản trọn gói:** Chăm sóc mẹ và bé từ trước khi mang thai, trong suốt thai kỳ đến khi sinh nở và sau sinh.\n\nNếu bạn cần tra cứu thông tin bác sĩ, chuyên khoa cụ thể hoặc muốn đặt lịch khám bệnh tại Vinmec, hãy cho tôi biết nhé!",
+    "latency_ms": 3572.49
   },
   {
     "step": 1,
     "query": "Hãy tra cứu lịch làm việc của bác sĩ Nguyễn Minh Anh thuộc chuyên khoa Tim mạch.",
     "action_type": "TOOL_EXECUTION",
+    "thought": "Gemini quyết định gọi công cụ 'doctor_schedule_query' với tham số: {\"specialty\": \"Tim mạch\", \"doctor_name\": \"Nguyễn Minh Anh\"}",
     "tool_name": "doctor_schedule_query",
     "arguments": {
       "specialty": "Tim mạch",
@@ -28,7 +29,7 @@
         ]
       }
     },
-    "latency_ms": 1375.94
+    "latency_ms": 1655.18
   },
   {
     "step": 2,
@@ -42,12 +43,13 @@
     "step": 1,
     "query": "Hãy đặt lịch khám Tim mạch với bác sĩ Nguyễn Minh Anh vào lúc 09:00 ngày 20/09/2026 cho bệnh nhân Trần Văn Bình.",
     "action_type": "TOOL_EXECUTION",
+    "thought": "Gemini quyết định gọi công cụ 'book_appointment' với tham số: {\"patient_name\": \"Trần Văn Bình\", \"specialty\": \"Tim mạch\", \"doctor_name\": \"Nguyễn Minh Anh\", \"datetime_str\": \"09:00 20/09/2026\"}",
     "tool_name": "book_appointment",
     "arguments": {
+      "patient_name": "Trần Văn Bình",
       "specialty": "Tim mạch",
       "doctor_name": "Nguyễn Minh Anh",
-      "datetime_str": "09:00 20/09/2026",
-      "patient_name": "Trần Văn Bình"
+      "datetime_str": "09:00 20/09/2026"
     },
     "observation": {
       "status": "SUCCESS",
@@ -58,7 +60,7 @@
       "datetime": "09:00 20/09/2026",
       "message": "Đặt lịch khám thành công cho bệnh nhân Trần Văn Bình với bác sĩ Nguyễn Minh Anh vào lúc 09:00 20/09/2026."
     },
-    "latency_ms": 1667.22
+    "latency_ms": 1616.72
   },
   {
     "step": 2,
@@ -72,6 +74,7 @@
     "step": 1,
     "query": "Tôi muốn khám da liễu vào lúc 14:00 ngày 21/09/2026. Hãy tìm bác sĩ da liễu đang làm việc phù hợp rồi đặt lịch cho bệnh nhân Lê Thị Hoa.",
     "action_type": "TOOL_EXECUTION",
+    "thought": "Gemini quyết định gọi công cụ 'doctor_schedule_query' với tham số: {\"specialty\": \"Da liễu\"}",
     "tool_name": "doctor_schedule_query",
     "arguments": {
       "specialty": "Da liễu"
@@ -88,18 +91,19 @@
         ]
       }
     },
-    "latency_ms": 1364.52
+    "latency_ms": 1585.76
   },
   {
     "step": 2,
     "query": "Tôi muốn khám da liễu vào lúc 14:00 ngày 21/09/2026. Hãy tìm bác sĩ da liễu đang làm việc phù hợp rồi đặt lịch cho bệnh nhân Lê Thị Hoa.",
     "action_type": "TOOL_EXECUTION",
+    "thought": "Gemini quyết định gọi công cụ 'book_appointment' với tham số: {\"datetime_str\": \"14:00 21/09/2026\", \"specialty\": \"Da liễu\", \"patient_name\": \"Lê Thị Hoa\", \"doctor_name\": \"Phạm Thu Hà\"}",
     "tool_name": "book_appointment",
     "arguments": {
-      "patient_name": "Lê Thị Hoa",
       "datetime_str": "14:00 21/09/2026",
-      "doctor_name": "Phạm Thu Hà",
-      "specialty": "Da liễu"
+      "specialty": "Da liễu",
+      "patient_name": "Lê Thị Hoa",
+      "doctor_name": "Phạm Thu Hà"
     },
     "observation": {
       "status": "SUCCESS",
@@ -110,7 +114,7 @@
       "datetime": "14:00 21/09/2026",
       "message": "Đặt lịch khám thành công cho bệnh nhân Lê Thị Hoa với bác sĩ Phạm Thu Hà vào lúc 14:00 21/09/2026."
     },
-    "latency_ms": 1972.69
+    "latency_ms": 1411.06
   },
   {
     "step": 3,
@@ -124,6 +128,7 @@
     "step": 1,
     "query": "Hãy tra cứu lịch của bác sĩ không tồn tại tên là Bác sĩ Không Tồn Tại.",
     "action_type": "TOOL_EXECUTION",
+    "thought": "Gemini quyết định gọi công cụ 'doctor_schedule_query' với tham số: {\"doctor_name\": \"Bác sĩ Không Tồn Tại\"}",
     "tool_name": "doctor_schedule_query",
     "arguments": {
       "doctor_name": "Bác sĩ Không Tồn Tại"
@@ -132,7 +137,7 @@
       "status": "NOT_FOUND",
       "message": "Không tìm thấy bác sĩ hoặc lịch làm việc phù hợp."
     },
-    "latency_ms": 1426.67
+    "latency_ms": 1479.03
   },
   {
     "step": 2,
