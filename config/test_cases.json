@@ -1,0 +1,37 @@
+[
+  {
+    "id": "TC01",
+    "type": "direct_query",
+    "question": "Xin chào, bạn có thể giới thiệu các dịch vụ khám bệnh tại Vinmec không?",
+    "expected_behavior": "Agent trả lời trực tiếp thông tin chung, không cần gọi Tool.",
+    "complexity": "Low"
+  },
+  {
+    "id": "TC02",
+    "type": "single_tool_query",
+    "question": "Hãy tra cứu lịch làm việc của bác sĩ Nguyễn Minh Anh thuộc chuyên khoa Tim mạch.",
+    "expected_behavior": "Agent gọi Tool doctor_schedule_query để tra cứu lịch bác sĩ.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC03",
+    "type": "appointment_booking",
+    "question": "Hãy đặt lịch khám Tim mạch với bác sĩ Nguyễn Minh Anh vào lúc 09:00 ngày 20/09/2026 cho bệnh nhân Trần Văn Bình.",
+    "expected_behavior": "Agent gọi Tool book_appointment với đúng thông tin bệnh nhân, bác sĩ, chuyên khoa và thời gian.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC04",
+    "type": "multi_step_reasoning",
+    "question": "Tôi muốn khám da liễu vào lúc 14:00 ngày 21/09/2026. Hãy tìm bác sĩ da liễu đang làm việc phù hợp rồi đặt lịch cho bệnh nhân Lê Thị Hoa.",
+    "expected_behavior": "Agent tra cứu bác sĩ và lịch làm việc trước, sau đó dùng kết quả để đặt lịch khám.",
+    "complexity": "High"
+  },
+  {
+    "id": "TC05",
+    "type": "edge_case_handling",
+    "question": "Hãy tra cứu lịch của bác sĩ không tồn tại tên là Bác sĩ Không Tồn Tại.",
+    "expected_behavior": "Agent thông báo không tìm thấy dữ liệu và không tự bịa thông tin bác sĩ hoặc lịch khám.",
+    "complexity": "Medium"
+  }
+]

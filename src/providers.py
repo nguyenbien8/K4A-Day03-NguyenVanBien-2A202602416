@@ -15,7 +15,7 @@ if sys.stdout.encoding != 'utf-8':
     except Exception:
         pass
 
-load_dotenv()
+load_dotenv(override=True)
 
 class BaseLLMProvider:
     """Interface cơ sở cho các LLM Provider hỗ trợ Native Tool Calling"""
@@ -37,26 +37,60 @@ class MockOfflineProvider(BaseLLMProvider):
     def generate_with_tools(self, prompt: str, tools_schema: List[Dict[str, Any]], system_prompt: str = "") -> Dict[str, Any]:
         prompt_lower = prompt.lower()
         
-        # Mô phỏng nhận diện intent gọi Tool
-        if "sv2026001" in prompt_lower and "đặt lịch" in prompt_lower:
+        # Mô phỏng nhận diện intent gọi Tool theo chủ đề Vinmec.
+        if "không tồn tại" in prompt_lower:
             return {
                 "type": "tool_call",
-                "tool_name": "schedule_appointment",
-                "arguments": {"student_id": "SV2026001", "datetime_str": "14:00 15/09/2026", "advisor_name": "PGS.TS Nguyễn Văn A"},
-                "thought": "Người dùng yêu cầu đặt lịch hẹn tư vấn cho sinh viên SV2026001. Tôi sẽ gọi tool schedule_appointment."
+                "tool_name": "doctor_schedule_query",
+                "arguments": {"doctor_name": "Bác sĩ Không Tồn Tại"},
+                "thought": "Người dùng hỏi về một bác sĩ không tồn tại. Tôi sẽ gọi tool doctor_schedule_query để kiểm tra dữ liệu."
             }
-        elif "sv2026001" in prompt_lower or "tra cứu" in prompt_lower:
+        elif "observation" in prompt_lower and "book_appointment" in prompt_lower:
             return {
                 "type": "tool_call",
-                "tool_name": "academic_query",
-                "arguments": {"student_id": "SV2026001"},
-                "thought": "Người dùng muốn tra cứu thông tin học vụ của sinh viên SV2026001. Tôi sẽ gọi tool academic_query."
+                "tool_name": "book_appointment",
+                "arguments": {
+                    "patient_name": "Lê Thị Hoa",
+                    "doctor_name": "Phạm Thu Hà",
+                    "specialty": "Da liễu",
+                    "datetime_str": "14:00 21/09/2026"
+                },
+                "thought": "Observation xác nhận bác sĩ Da liễu có lịch phù hợp. Tôi sẽ gọi book_appointment để hoàn tất yêu cầu."
+            }
+        elif "tìm bác sĩ" in prompt_lower or "da liễu" in prompt_lower:
+            return {
+                "type": "tool_call",
+                "tool_name": "doctor_schedule_query",
+                "arguments": {
+                    "doctor_name": "Nguyễn Minh Anh" if "tim mạch" in prompt_lower else "",
+                    "specialty": "Tim mạch" if "tim mạch" in prompt_lower else "Da liễu"
+                },
+                "thought": "Người dùng muốn tra cứu lịch làm việc của bác sĩ. Tôi sẽ gọi tool doctor_schedule_query."
+            }
+        elif "đặt lịch" in prompt_lower or "đặt hẹn" in prompt_lower:
+            return {
+                "type": "tool_call",
+                "tool_name": "book_appointment",
+                "arguments": {
+                    "patient_name": "Trần Văn Bình",
+                    "doctor_name": "Nguyễn Minh Anh",
+                    "specialty": "Tim mạch",
+                    "datetime_str": "09:00 20/09/2026"
+                },
+                "thought": "Người dùng yêu cầu đặt lịch khám tại Vinmec. Tôi sẽ gọi tool book_appointment."
+            }
+        elif "bác sĩ" in prompt_lower or "lịch làm việc" in prompt_lower:
+            return {
+                "type": "tool_call",
+                "tool_name": "doctor_schedule_query",
+                "arguments": {"doctor_name": "Nguyễn Minh Anh", "specialty": "Tim mạch"},
+                "thought": "Người dùng muốn tra cứu lịch làm việc của bác sĩ. Tôi sẽ gọi tool doctor_schedule_query."
             }
         else:
             return {
                 "type": "text",
-                "content": f"[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-                "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool."
+                "content": "Vinmec cung cấp các dịch vụ khám và điều trị tại nhiều chuyên khoa. Để biết lịch bác sĩ hoặc đặt lịch khám, bạn có thể cung cấp chuyên khoa và thời gian mong muốn.",
+                "thought": "Đây là câu hỏi chung về dịch vụ, không cần gọi Tool."
             }
 
 

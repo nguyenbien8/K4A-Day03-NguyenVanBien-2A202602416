@@ -1,29 +1,145 @@
 [
   {
     "step": 1,
-    "query": "Chào bạn, bạn có thể giới thiệu quy chế học vụ cơ bản của Đại học VinUni không?",
+    "query": "Xin chào, bạn có thể giới thiệu các dịch vụ khám bệnh tại Vinmec không?",
     "action_type": "FINAL_ANSWER",
-    "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool.",
-    "output": "[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-    "latency_ms": 2845.93
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "Chào bạn! Hệ thống Y tế Vinmec cung cấp các dịch vụ khám chữa bệnh chất lượng cao theo tiêu chuẩn quốc tế với nhiều chuyên khoa đa dạng, bao gồm:\n\n1. **Khám Tổng quát & Sức khỏe định kỳ:** Các gói khám sức khỏe tổng quát cá nhân hóa, khám doanh nghiệp và tầm soát ung thư sớm.\n2. **Chuyên khoa Mũi nhọn:**\n   - **Tim mạch:** Khám, chẩn đoán và điều trị các bệnh lý tim mạch bằng công nghệ tiên tiến (Can thiệp mạch vành, phẫu thuật tim mạch,...).\n   - **Ung bướu:** Tầm soát, hóa trị, xạ trị và chăm sóc giảm nhẹ.\n   - **Sản Phụ khoa:** Khám thai, dịch vụ thai sản trọn gói, điều trị vô sinh hiếm muộn và các bệnh lý phụ khoa.\n   - **Nhi khoa:** Khám và điều trị toàn diện cho trẻ em với không gian thân thiện.\n   - **Cơ xương khớp & Y học thể thao:** Điều trị các chấn thương thể thao, thay khớp, thoái hóa khớp.\n3. **Các chuyên khoa khác:** Thần kinh, Tiêu hóa, Mắt, Tai Mũi Họng, Răng Hàm Mặt, Da liễu, Y học cổ truyền,...\n4. **Dịch vụ cận lâm sàng:** Hệ thống chẩn đoán hình ảnh (MRI, CT Scan hiện đại) và xét nghiệm đạt chuẩn quốc tế.\n\nNếu bạn cần tra cứu thông tin bác sĩ, chuyên khoa cụ thể hoặc muốn đặt lịch khám, hãy cho tôi biết nhé!",
+    "latency_ms": 3517.09
   },
   {
     "step": 1,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
+    "query": "Hãy tra cứu lịch làm việc của bác sĩ Nguyễn Minh Anh thuộc chuyên khoa Tim mạch.",
     "action_type": "TOOL_EXECUTION",
-    "tool_name": "academic_query",
+    "tool_name": "doctor_schedule_query",
     "arguments": {
-      "student_id": "SV2026001"
+      "specialty": "Tim mạch",
+      "doctor_name": "Nguyễn Minh Anh"
     },
-    "observation": {},
-    "latency_ms": 799.12
+    "observation": {
+      "status": "SUCCESS",
+      "data": {
+        "doctor_name": "Nguyễn Minh Anh",
+        "specialty": "Tim mạch",
+        "hospital": "Vinmec Times City",
+        "available_slots": [
+          "09:00 20/09/2026",
+          "10:30 20/09/2026"
+        ]
+      }
+    },
+    "latency_ms": 1375.94
   },
   {
     "step": 2,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
+    "query": "Hãy tra cứu lịch làm việc của bác sĩ Nguyễn Minh Anh thuộc chuyên khoa Tim mạch.",
     "action_type": "FINAL_ANSWER",
     "thought": "Tổng hợp kết quả từ MCP Server thành công.",
-    "output": "Chưa thể trả lời chi tiết do chưa nhận được dữ liệu từ MCP Server (hãy hoàn thành TODO 2.1).",
+    "output": "Bác sĩ Nguyễn Minh Anh thuộc chuyên khoa Tim mạch làm việc tại Vinmec Times City. Các khung giờ hiện có: 09:00 20/09/2026, 10:30 20/09/2026.",
+    "latency_ms": 10.0
+  },
+  {
+    "step": 1,
+    "query": "Hãy đặt lịch khám Tim mạch với bác sĩ Nguyễn Minh Anh vào lúc 09:00 ngày 20/09/2026 cho bệnh nhân Trần Văn Bình.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "book_appointment",
+    "arguments": {
+      "specialty": "Tim mạch",
+      "doctor_name": "Nguyễn Minh Anh",
+      "datetime_str": "09:00 20/09/2026",
+      "patient_name": "Trần Văn Bình"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "booking_id": "VM-20260920-001",
+      "patient_name": "Trần Văn Bình",
+      "doctor_name": "Nguyễn Minh Anh",
+      "specialty": "Tim mạch",
+      "datetime": "09:00 20/09/2026",
+      "message": "Đặt lịch khám thành công cho bệnh nhân Trần Văn Bình với bác sĩ Nguyễn Minh Anh vào lúc 09:00 20/09/2026."
+    },
+    "latency_ms": 1667.22
+  },
+  {
+    "step": 2,
+    "query": "Hãy đặt lịch khám Tim mạch với bác sĩ Nguyễn Minh Anh vào lúc 09:00 ngày 20/09/2026 cho bệnh nhân Trần Văn Bình.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
+    "output": "Đặt lịch khám thành công cho bệnh nhân Trần Văn Bình với bác sĩ Nguyễn Minh Anh vào lúc 09:00 20/09/2026.",
+    "latency_ms": 10.0
+  },
+  {
+    "step": 1,
+    "query": "Tôi muốn khám da liễu vào lúc 14:00 ngày 21/09/2026. Hãy tìm bác sĩ da liễu đang làm việc phù hợp rồi đặt lịch cho bệnh nhân Lê Thị Hoa.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "doctor_schedule_query",
+    "arguments": {
+      "specialty": "Da liễu"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "data": {
+        "doctor_name": "Phạm Thu Hà",
+        "specialty": "Da liễu",
+        "hospital": "Vinmec Central Park",
+        "available_slots": [
+          "14:00 21/09/2026",
+          "15:30 21/09/2026"
+        ]
+      }
+    },
+    "latency_ms": 1364.52
+  },
+  {
+    "step": 2,
+    "query": "Tôi muốn khám da liễu vào lúc 14:00 ngày 21/09/2026. Hãy tìm bác sĩ da liễu đang làm việc phù hợp rồi đặt lịch cho bệnh nhân Lê Thị Hoa.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "book_appointment",
+    "arguments": {
+      "patient_name": "Lê Thị Hoa",
+      "datetime_str": "14:00 21/09/2026",
+      "doctor_name": "Phạm Thu Hà",
+      "specialty": "Da liễu"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "booking_id": "VM-20260920-001",
+      "patient_name": "Lê Thị Hoa",
+      "doctor_name": "Phạm Thu Hà",
+      "specialty": "Da liễu",
+      "datetime": "14:00 21/09/2026",
+      "message": "Đặt lịch khám thành công cho bệnh nhân Lê Thị Hoa với bác sĩ Phạm Thu Hà vào lúc 14:00 21/09/2026."
+    },
+    "latency_ms": 1972.69
+  },
+  {
+    "step": 3,
+    "query": "Tôi muốn khám da liễu vào lúc 14:00 ngày 21/09/2026. Hãy tìm bác sĩ da liễu đang làm việc phù hợp rồi đặt lịch cho bệnh nhân Lê Thị Hoa.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
+    "output": "Đặt lịch khám thành công cho bệnh nhân Lê Thị Hoa với bác sĩ Phạm Thu Hà vào lúc 14:00 21/09/2026.",
+    "latency_ms": 10.0
+  },
+  {
+    "step": 1,
+    "query": "Hãy tra cứu lịch của bác sĩ không tồn tại tên là Bác sĩ Không Tồn Tại.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "doctor_schedule_query",
+    "arguments": {
+      "doctor_name": "Bác sĩ Không Tồn Tại"
+    },
+    "observation": {
+      "status": "NOT_FOUND",
+      "message": "Không tìm thấy bác sĩ hoặc lịch làm việc phù hợp."
+    },
+    "latency_ms": 1426.67
+  },
+  {
+    "step": 2,
+    "query": "Hãy tra cứu lịch của bác sĩ không tồn tại tên là Bác sĩ Không Tồn Tại.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
+    "output": "Không tìm thấy bác sĩ hoặc lịch làm việc phù hợp.",
     "latency_ms": 10.0
   }
 ]
